@@ -1,0 +1,213 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #121212;
+    color: #e0e0e0;
+}
+
+header {
+    height: 25px;
+    background: #1db954;
+    color: #fff;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    margin: 0;
+    font-weight: bold;
+    text-align: center;
+    flex: 1;
+}
+
+#greeting {
+    position: absolute;
+    right: 45px;
+    top: 15px;
+    font-size: 25px;
+    font-weight: bolder;
+    color: #fff;
+}
+
+.sidebar {
+    width: 250px;
+    background: #282828;
+    position: fixed;
+    left: -250px;
+    top: 100px;
+    height: 100%;
+    transition: left 0.3s;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.sidebar-toggle {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    border-bottom: 1px solid #404040;
+}
+
+.sidebar ul li a {
+    display: block;
+    color: #b3b3b3;
+    padding: 15px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.sidebar ul li a:hover {
+    background: #1db954;
+    color: #fff;
+}
+
+.sidebar-toggle {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+main {
+    margin-left: 0;
+    padding: 60px 20px 20px 20px;
+    transition: margin-left 0.3s;
+}
+
+.carousel-container {
+    position: fixed;
+    margin-left: 240px;
+    width: 28%;
+    overflow: hidden;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    min-width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    position: relative;
+}
+
+.carousel-item img {
+    width: 100%;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.song-info {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 100;
+}
+
+#carousel-prev {
+    left: 10px;
+    transform: translateY(-50%);
+}
+
+#carousel-next {
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+.heart-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #b3b3b3;
+}
+
+.heart-button .fas {
+    color: #e63946;
+}
+
+.heart-button .far {
+    color: #b3b3b3;
+}
+
+footer {
+    background: #282828;
+    color: #b3b3b3;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.social-icons a {
+    color: #b3b3b3;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.social-icons a:hover {
+    color: #1db954;
+}
+
+/* Adjusting the default Spotify page view */
+#home-content {
+    display: block;
+}
+
+#home-content {
+    position: fixed;
+    left: 250px;
+    top: 60px;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+}
+
+#home-content h2, h3 {
+    margin-left: -170px;
+    text-align: center;
+    transition: text-align 0.3s ease-in-out;
+    font-size: 20px;
+}
+
+#search-input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #1db954;
+    background: #121212;
+    color: #e0e0e0;
+}
+
+#search-content, #library-content {
+    display: none;
+}

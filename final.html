@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Clone Website</title>
+    <link rel="icon" href="spotify.jpg" type="image/jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #121212;
+            color: #e0e0e0;
+        }
+
+        header {
+            height: 60px;
+            background: #1db954;
+            color: #fff;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: bold;
+            text-align: center;
+            flex: 1;
+        }
+
+        #greeting {
+            font-size: 25px;
+            font-weight: bolder;
+            color: #fff;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #282828;
+            position: fixed;
+            left: -250px;
+            top: 100px;
+            height: 100%;
+            transition: left 0.3s;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .sidebar-toggle {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            border-bottom: 1px solid #404040;
+        }
+
+        .sidebar ul li a {
+            display: block;
+            color: #b3b3b3;
+            padding: 15px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .sidebar ul li a:hover {
+            background: #1db954;
+            color: #fff;
+        }
+
+        main {
+            margin-left: 0;
+            padding: 60px 20px 20px 20px;
+            transition: margin-left 0.3s;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            position: relative;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        .carousel-item .song-info {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 100;
+            font-size: 24px;
+        }
+
+        #carousel-prev {
+            left: 10px;
+            transform: translateY(-50%);
+        }
+
+        #carousel-next {
+            right: 10px;
+            transform: translateY(-50%);
+        }
+
+        .heart-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: #b3b3b3;
+        }
+
+        .heart-button .fas {
+            color: #e63946;
+        }
+
+        .heart-button .far {
+            color: #b3b3b3;
+        }
+
+        footer {
+            background: #282828;
+            color: #b3b3b3;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .social-icons a {
+            color: #b3b3b3;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            color: #1db954;
+        }
+
+        #home-content {
+            position: relative;
+            padding: 20px;
+        }
+
+        #home-content h2, #home-content h3 {
+            text-align: center;
+            font-size: 20px;
+        }
+
+        #search-content, #library-content {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="greeting"></div>
+        <a href="https://www.spotify.com" target="_blank"><img src="spotify.jpg" alt="Spotify" style="width: 40px; height: 40px; margin-right: 25px;"></a>
+        <h1>Spotify Clone Website</h1>
+        <span class="sidebar-toggle"><i class="fas fa-bars"></i></span>
+    </header>
+    
+    <div class="sidebar">
+        <ul>
+            <li><a href="#" id="home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#" id="search"><i class="fas fa-search"></i> Search</a></li>
+            <li><a href="#" id="library"><i class="fas fa-book"></i> Library</a></li>
+            <li><a href="#" id="your-library"><i class="fas fa-list"></i> Your Library</a></li>
+            <li><a href="#" id="liked-songs"><i class="fas fa-heart"></i> Liked Songs</a></li>
+            <li><a href="#" id="settings"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <section id="home-content">
+            <h3><b>Home</b></h3>
+            <h3><b>List of songs you can play in Spotify currently!!</b></h3>
+            <section class="carousel-container">
+                <button id="carousel-prev" class="carousel-button">❮</button>
+                <div class="carousel">
+                    <div class="carousel-item" data-audio="Neethane.mp3">
+                        <img src="Neethane.jpg" alt="Neethane">
+                        <div class="song-info">Neethane</div>
+                        <button class="heart-button"><i class="far fa-heart"></i></button>
+                    </div>
+                    <div class="carousel-item" data-audio="Vaseegara.mp3">
+                        <img src="Vaseegara.jpg" alt="Vaseegara">
+                        <div class="song-info">Vaseegara</div>
+                        <button class="heart-button"><i class="far fa-heart"></i></button>
+                    </div>
+                    <!-- More carousel items here -->
+                </div>
+                <button id="carousel-next" class="carousel-button">❯</button>
+            </section>
+        </section>
+
+        <section id="search-content">
+            <h2>Search</h2>
+            <div id="search-bar">
+                <input type="text" id="search-input" placeholder="Search for songs, albums, or artists">
+                <button id="search-button">Search</button>
+            </div>
+            <div id="search-results"></div>
+        </section>
+
+        <section id="library-content">
+            <h2>Your Library</h2>
+            <button id="create-playlist">Create Playlist</button>
+            <div id="playlist-content"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/spotify" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/spotify" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/spotify" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        let currentIndex = 0;
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        const totalItems = carouselItems.length;
+        const carousel = document.querySelector('.carousel');
+        const prevButton = document.getElementById('carousel-prev');
+        const nextButton = document.getElementById('carousel-next');
+
+        function setupCarousel() {
+            carousel.style.transform = `translateX(${-currentIndex * 100}%)`;
+        }
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : totalItems - 1;
+            setupCarousel();
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex < totalItems - 1) ? currentIndex + 1 : 0;
+            setupCarousel();
+        });
+
+        document.querySelectorAll('.heart-button').forEach(button => {
+            button.addEventListener('click', () => {
+                button.classList.toggle('active');
+                const icon = button.querySelector('i');
+                icon.classList.toggle('far');
+                icon.classList.toggle('fas');
+            });
+        });
+
+        document.querySelector('.sidebar-toggle').addEventListener('click', () => {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.style.left = sidebar.style.left === '0px' ? '-250px' : '0px';
+            document.querySelector('main').style.marginLeft = sidebar.style.left;
+        });
+
+        document.getElementById('home').addEventListener('click', () => {
+            document.getElementById('home-content').style.display = 'block';
+            document.getElementById('search-content').style.display = 'none';
+            document.getElementById('library-content').style.display = 'none';
+        });
+
+        document.getElementById('search').addEventListener('click', () => {
+            document.getElementById('home-content').style.display = 'none';
+            document.getElementById('search-content').style.display = 'block';
+            document.getElementById('library-content').style.display = 'none';
+        });
+
+        document.getElementById('library').addEventListener('click', () => {
+            document.getElementById('home-content').style.display = 'none';
+            document.getElementById('search-content').style.display = 'none';
+            document.getElementById('library-content').style.display = 'block';
+        });
+
+        document.getElementById('settings').addEventListener('click', () => {
+            window.location.href = 'login.html';
+        });
+
+        setupCarousel();
+
+        function setGreeting() {
+            const now = new Date();
+            const hours = now.getHours();
+            let greeting = 'Good Morning';
+            if (hours >= 12 && hours < 18) {
+                greeting = 'Good Afternoon';
+            } else if (hours >= 18) {
+                greeting = 'Good Evening';
+            }
+            document.getElementById('greeting').textContent = greeting;
+        }
+
+        setGreeting();
+    </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Clone Website</title>
+    <link rel="icon" href="spotify.jpg" type="image/jpg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div id="greeting"></div>
+        <a href="https://www.spotify.com" target="_blank"><img src="spotify.jpg" alt="Spotify" style="width: 40px; height: 40px; margin-right: 25px;"></a>
+        <h1>Spotify Clone Website</h1>
+        <span class="sidebar-toggle"><i class="fas fa-bars"></i></span>
+    </header>
+
+    <div class="sidebar">
+        <ul>
+            <li><a href="#" id="home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#" id="search"><i class="fas fa-search"></i> Search</a></li>
+            <li><a href="#" id="library"><i class="fas fa-book"></i> Library</a></li>
+            <li><a href="#" id="your-library"><i class="fas fa-list"></i> Your Library</a></li>
+            <li><a href="#" id="liked-songs"><i class="fas fa-heart"></i> Liked Songs</a></li>
+            <li><a href="#" id="settings"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <section id="home-content">
+            <h3><b>Home</b></h3>
+            <h3><b>List of songs you can play in spotify currently!!</b></h3>
+            <section class="carousel-container">
+                <button id="carousel-prev" class="carousel-button">❮</button>
+                <div class="carousel">
+                    <div class="carousel-item" data-audio="Neethane.mp3">
+                        <img src="Neethane.jpg" alt="Neethane">
+                        <div class="song-info">Neethane</div>
+                        <button class="heart-button"><i class="far fa-heart"></i></button>
+                        <audio id="audio-Neethane" src="Neethane.mp3"></audio>
+                    </div>
+                    <!-- Additional carousel items here -->
+                </div>
+                <button id="carousel-next" class="carousel-button">❯</button>
+            </section>
+        </section>
+
+        <section id="search-content">
+            <h2>Search</h2>
+            <div id="search-bar">
+                <input type="text" id="search-input" placeholder="Search for songs, albums, or artists">
+                <button id="search-button">Search</button>
+            </div>
+            <div id="search-results"></div>
+        </section>
+
+        <section id="library-content">
+            <h2>Your Library</h2>
+            <button id="create-playlist">Create Playlist</button>
+            <div id="playlist-content"></div>
+        </section>
+
+        <section id="liked-songs-content" style="display: none;">
+            <h3><b>Liked Songs</b></h3>
+            <ul id="liked-songs-list">
+                <!-- Liked songs will be dynamically inserted here -->
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/spotify" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/spotify" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/spotify" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>© 2024 Spotify Clone. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
