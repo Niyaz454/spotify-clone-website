@@ -1,0 +1,233 @@
+        
+body {
+    font-family: Arial, sans-serif;
+   
+    background: linear-gradient(135deg, #1DB954 0%, #121212 100%); 
+    color: #e1e1e1;
+}
+
+header {
+            height: 25px; ;
+            background: #1db954;
+            color: #fff;
+            padding: 15px;
+            display: flex;
+            justify-content:space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+header h1 {
+    text-align: center ; 
+    font-weight: bold; 
+    flex: 1; 
+        }
+
+#greeting {
+    position: absolute;
+    right: 45px; 
+    top: 15px;
+    font-size: 25px;
+    font-weight: bolder;
+    color: #fff;
+}
+
+.sidebar {
+            width: 100px;
+            background: #282828;
+            position: fixed;
+            left: -250px;
+            top: 115px;;
+            height: 100%;
+            transition: left 0.3s;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        
+.sidebar-toggle {
+    position: absolute;
+    left: 5px; /* Adjust this value as needed */
+    top: 80px;
+    transform: translateY(-50%);
+}
+
+.sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+.sidebar ul li {
+            border-bottom: 1px solid #404040;
+        }
+
+.sidebar ul li a {
+            display: block;
+            color: #b3b3b3;
+            padding: 15px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+.sidebar ul li a:hover {
+            background: #1db954;
+            color: #fff;
+        }
+
+.sidebar-toggle {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+
+        
+
+        main {
+            margin-left: 0;
+            padding: 60px 20px 20px 20px;
+            transition: margin-left 0.3s;
+        }
+
+        
+
+       
+       
+        .carousel-container {
+            
+            position:fixed;
+            margin-left:-148px;
+            width: 45%;
+            justify-content: center;
+            
+            
+}
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            
+        }
+
+        .carousel-item {
+            top: 10px;
+            height:190px;
+            min-width: 20%;
+            box-sizing: border-box;
+            text-align: center;
+            position: relative;
+            
+        }
+
+        .carousel-item img {
+            width: 80%;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .carousel-button {
+            background-color: #1db954;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+        #carousel-prev {
+            left: 10px;
+        }
+        #carousel-next {
+            right: -530px;
+        }
+
+        .song-info {
+            margin-top: 10px;
+            font-size: 18px;
+            font-style:italic;
+
+        }
+       
+
+        .heart-button {
+            position: absolute;
+            top: 0px;
+            right: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: #b3b3b3;
+        }
+
+        .heart-button .fas {
+            color: #e63946;
+        }
+
+        .heart-button .far {
+            color: #b3b3b3;
+        }
+        audio {
+    display: block;
+    
+    margin: 50px 0;
+    width: 90vw;
+    background: #1db954;
+    color: #4b6d1f;
+    border: none;
+    border-radius: 10px;
+}
+       
+       
+        footer {
+            background: #282828;
+            color: #b3b3b3;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .social-icons a {
+            color: #b3b3b3;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            color: #1db954;
+        }
+
+        
+        #home-content {
+            display: block;
+        }
+
+        #home-content {
+
+    position: fixed;
+    left: 250px; 
+    top: 80px; 
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+}
+
+        #home-content.h2,h3 {
+            margin-top: 12px;
+            margin-left: -170px;
+            text-align: center; 
+            transition: text-align 0.3s ease-in-out; 
+            font-size: 20px;
+        }
+        
+
+
+      
+
+     

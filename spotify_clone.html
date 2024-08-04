@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Spotify Clone Website</title>
+    <link rel="icon" href="spotify.jpg" type="image/jpg">
+    <link rel="stylesheet" href="spotify_clone.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+   
+</head>
+<body>
+    <header>
+        <div id="greeting"></div>
+        <img src="spotify.jpg" alt="Spotify" style="width: 40px; height: 40px;"></a>
+        <h1>Spotify Clone Website</h1>
+        
+        <span class="sidebar-toggle"><i class="fas fa-bars"><br>Spotify Menu Bar</span>
+    </header>
+    
+    <div class="sidebar">
+        <ul>
+            <li><a href="#" id="home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#" id="search"><i class="fas fa-search"></i> Search</a></li>
+            <li><a href="#" id="library"><i class="fas fa-book"></i> Library</a></li>
+            
+            <li><a href="#" id="liked-songs"><i class="fas fa-heart"></i> Liked Songs</a></li>
+            <li><a href="#" id="settings"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+    </div>
+
+    <main>
+
+        
+        
+
+
+
+        <section id="home-content">
+            <h3><b>Home</b></h3>
+            
+    
+            <h3><b>List of songs you can play in spotify currently!!</b></h3>
+            <h3><i>Just a click on the song image!!</i> </h3>
+            <section class="carousel-container">
+                <button id="carousel-prev" class="carousel-button">❮</button>
+                <div class="carousel">
+                    <div class="carousel-item" data-audio="Neethane.mp3">
+                        <img src="Neethane.jpg" alt="Neethane">
+                        <div class="song-info">Neethane</div>
+                        <button class="heart-button"><i class="far fa-heart"></i></button>
+                        <audio id="audio-Neethane" src="Neethane.mp3"></audio>
+                    </div>
+                    <div class="carousel-item" data-audio="Vaseegara.mp3">
+                        <img src="Vaseegara.jpg" alt="Vaseegara">
+                        <div class="song-info">Vaseegara</div>
+                        <button class="heart-button"><i class="far fa-heart"></i></button>
+                        <audio id="audio-Vaseegara" src="Vaseegara.mp3"></audio>
+                    </div>
+                    <div class="carousel-item" data-audio="Whistle Podu.mp3">
+                        <img src="Whistle Podu.jpg" alt="Whistle Podu">
+                        <div class="song-info">Whistle Podu</div>
+                        <button class="heart-button"><i class="far fa-heart"></i></button>
+                        <audio id="audio-WhistlePodu" src="Whistle Podu.mp3"></audio>
+                    </div>
+                    <div class="carousel-item" data-audio="En Jeevan.mp3">
+                        <img src="En Jeevan.png" alt="En Jeevan">
+                        <div class="song-info">En Jeevan</div>
+                        <button class="heart-button"><i class="far fa-heart"></i></button>
+                        <audio id="audio-EnJeevan" src="En Jeevan.mp3"></audio>
+                    </div>
+                    <div class="carousel-item" data-audio="Youth of Power Pandi.mp3">
+                        <img src="Youth of Power Pandi.jpg" alt="Youth of Power Pandi">
+                        <div class="song-info">Youth of Power Pandi</div>
+                        <button class="heart-button"><i class="far fa-heart"></i></button>
+                        <audio id="audio-YouthofPowerPandi" src="Youth of Power Pandi.mp3"></audio>
+                    </div>
+                    <div class="carousel-item" data-audio="Enamo Yedho.mp3">
+                        <img src="Enamo Yedho.jpg" alt="Enamo Yedho">
+                        <div class="song-info">Enamo Yedho</div>
+                        <button class="heart-button"><i class="far fa-heart"></i></button>
+                        <audio id="audio-EnamoYedho" src="Enamo Yedho.mp3"></audio>
+                    </div>
+                    <div class="carousel-item" data-audio="Chinna Chinna Kangal.mp3">
+                        <img src="Chinna Chinna Kangal.jpg" alt="Chinna Chinna Kangal">
+                        <div class="song-info">Chinna Chinna Kangal</div>
+                        <button class="heart-button"><i class="far fa-heart"></i></button>
+                        <audio id="audio-ChinnaChinnaKangal" src="Chinna Chinna Kangal.mp3"></audio>
+                    </div>
+                    <div class="carousel-item" data-audio="Vaarayo Vaarayo.mp3">
+                        <img src="Vaarayo Vaarayo.jpg" alt="Vaarayo Vaarayo">
+                        <div class="song-info">Vaarayo Vaarayo</div>
+                        <button class="heart-button"><i class="far fa-heart"></i></button>
+                        <audio id="audio-VaarayoVaarayo" src="Vaarayo Vaarayo.mp3"></audio>
+                    </div>
+                    <div class="carousel-item" data-audio="Sirukki Vaasam.mp3">
+                        <img src="Sirukki Vaasam.jpg" alt="Song 1">
+                        <div class="song-info">Sirukki Vaasam</div>
+                        <button class="heart-button"><i class="far fa-heart"></i></button>
+                        <audio id="audio-SirukkiVaasam" src="Sirukki Vaasam.mp3"></audio>
+                    </div>
+                    
+                    <div class="carousel-item" data-audio="Maaris Aanandhi.mp3">
+                        <img src="Maaris Aanandhi.jpg" alt="Song 1">
+                        <div class="song-info">Maaris Aanandhi</div>
+                        <button class="heart-button"><i class="far fa-heart"></i></button>
+                        <audio id="audio-MaarisAanandhi" src="Maaris Aanandhi.mp3"></audio>
+                    </div>
+                    
+                </div>
+
+                </div>
+                <button id="carousel-next" class="carousel-button">❯</button>
+                <audio id="audio-player" controls>
+                    <source id="audio-source" src="" type="audio/mp3">
+                    Your browser does not support the audio element.
+                    
+                </section>
+                </audio>
+                
+               
+            </section>
+        </section>
+        
+        
+    </div>
+
+    </main>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/spotify" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/spotify" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/spotify" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p><b>© 2024 Spotify Clone. All rights reserved.</b></p>
+    </footer>
+    <script src="spotify_clone.js"></script>
+
+
+    
+</body>
+
+</html>

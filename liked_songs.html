@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Liked Songs</title>
+    <link rel="icon" href="spotify.jpg" type="image/jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(77, 162, 86); /* Spotify-like gradient */
+            margin: 0;
+            padding-top: 80px; /* Space for fixed header */
+        }
+        main {
+    padding: 80px 20px 150px; /* Padding for header and footer space */
+    overflow-y: auto; /* Enable vertical scrolling */
+    min-height: calc(100vh - 60px - 60px); /* Ensure the main section height adjusts */
+    box-sizing: border-box; /* Include padding in the element’s total height calculation */
+}
+
+
+        header {
+            height: 60px;
+            background: #1db954;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        header h1 {
+            margin: 0;
+            font-weight: bolder; /* Make the text bold */
+            text-align: center; /* Center align the text */
+            flex: 1; /* Allow the header title to take available space */
+        }
+        #greeting {
+            font-size: 25px;
+            font-weight: bolder;
+            color: #fff;
+        }
+        .song-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-height: 1500px;
+            
+            margin: 20px;
+        }
+        .song-card {
+            
+            background: #282828;
+            color: #fff;
+            border-radius: 10px;
+            height: 400px;
+            padding: 10px;
+            width: 220px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            margin: 10px;
+        }
+        .song-card:hover {
+            transform: rotateY(10deg) rotateX(10deg) scale(1.1);
+            
+        }
+        .song-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .song-card h3 {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        .song-card button {
+            padding: 10px 20px;
+            border: none;
+            background: #1db954;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+            margin: 5px;
+        }
+        .song-card button:hover {
+            background: #14833b;
+        }
+        .like-button {
+            color: #b3b3b3;
+            transition: color 0.3s ease;
+        }
+        .like-button.liked {
+            color: #1db954;
+        }
+        .share-button {
+            background: #1db954;
+        }
+        .share-button:hover {
+            background: #14833b;
+        }
+        .share-button .social-icons {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+       
+        .share-button:hover .social-icons {
+            display: flex;
+        }
+        .social-icons a {
+            color: #fff;
+            font-size: 20px;
+            text-decoration: none;
+            background: #333;
+            border-radius: 50%;
+            padding: 10px;
+            transition: background 0.3s ease;
+        }
+        .social-icons a:hover {
+            background: #1db954;
+        }
+
+
+        footer {
+    background: #282828;
+    color: #b3b3b3;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    box-sizing: border-box; /* Include padding in the element’s total height calculation */
+}
+
+        footer .social-icons a {
+            color: #b3b3b3;
+        }
+        footer .social-icons a:hover {
+            color: #1db954;
+        }
+        .success-message, .audio-player { margin: 0 auto; display: block; }
+
+       
+        .success-message {
+            color: #b93f1d;
+            font-size: 18px;
+            font-weight: bolder;
+            top:100px;
+            text-align: center;
+        }
+        .audio-player {
+            
+            display: none;
+            top: 70px;
+            width: 100%;
+            max-width: 300px;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="greeting"></div>
+        <a href="spotify_clone.html" target="_blank"><img src="spotify.jpg" alt="Spotify" style="width: 40px; height: 40px;"></a>
+        <h1>Liked Songs</h1>
+    </header>
+    <main>
+        <section id="liked-songs" class="song-list">
+            <!-- Liked songs will be dynamically added here -->
+        </section>
+        <div id="success-message" class="success-message" style="display:none;">Song played successfully!</div>
+        <audio id="audio-player" class="audio-player" controls>
+            <source id="audio-source" src="" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </main>
+    <footer>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/Spotify" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/Spotify" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/spotify/" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        <div><p>Spotify Clone &copy; 2024</p></div>
+    </footer>
+
+    <script>
+        let currentAudio = null; // Variable to keep track of the currently playing audio
+
+        // Song data
+        const songs = [
+            { title: 'Neethane', artist: 'AR RAHMAN',image: 'Neethane.jpg', mp3: 'Neethane.mp3' },
+            { title: 'Vaseegara', artist: 'HARRIS JAYARAJ', image: 'Vaseegara.jpg', mp3: 'Vaseegara.mp3' },
+            { title: 'Whistle Podu ', artist: 'YUVAN', image: 'Whistle Podu.jpg', mp3: 'Whistle Podu.mp3' },
+            { title: 'En Jeevan', artist: 'GV PRAKASH', image: 'En Jeevan.png', mp3: 'En Jeevan.mp3' },
+            { title: 'Youth of Power Pandi', artist: 'SEAN ROLDAN',image: 'Youth of Power Pandi.jpg', mp3: 'Youth of Power Pandi.mp3' },
+            { title: 'Enamo Yedho', artist: 'HARRIS JAYARAJ', image: 'Enamo Yedho.jpg', mp3: 'Enamo Yedho.mp3' },
+            { title: 'Chinna Chinna Kangal', artist: 'YUVAN', image: 'Chinna Chinna Kangal.jpg', mp3: 'Chinna Chinna Kangal.mp3' },
+            { title: 'Vaarayo Vaarayo',artist: 'HARRIS JAYARAJ',  image: 'Vaarayo Vaarayo.jpg', mp3: 'Vaarayo Vaarayo.mp3' },
+            { title: 'Sirukki Vaasam', artist: 'SANTHOSH NARAYANAN', image: 'Sirukki Vaasam.jpg', mp3: 'Sirukki Vaasam.mp3' },
+            { title: 'Maaris Aanandhi', artist: 'YUVAN', image: 'Maaris Aanandhi.jpg', mp3: 'Maaris Aanandhi.mp3' },
+    ];
+
+        // Create song cards
+        const songList = document.getElementById('liked-songs');
+        songs.forEach(song => {
+            const songCard = document.createElement('div');
+            songCard.classList.add('song-card');
+            songCard.innerHTML = `
+                <img src="${song.image}" alt="${song.title}">
+                <h3>${song.title}</h3>
+                <p>${song.artist}</p>
+                <button class="like-button" onclick="toggleLike(this)"><i class="fas fa-heart"></i> Like</button>
+                <button class="share-button" onclick="shareSong('${song.title}')">
+                    <i class="fas fa-share-alt"></i> Share
+                     <div class="social-icons">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=${window.location.href}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com/intent/tweet?url=${window.location.href}&text=Check out this song: ${song.title}" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/?url=${window.location.href}" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </button>
+                <button onclick="playSong('${song.mp3}')"><i class="fas fa-play"></i> Play</button>
+                <button onclick="stopSong()"><i class="fas fa-stop"></i> Stop</button>
+            `;
+            songList.appendChild(songCard);
+        });
+
+        // Play song functionality
+        function playSong(audioFile) {
+    const audioPlayer = document.getElementById('audio-player');
+    const audioSource = document.getElementById('audio-source');
+    audioSource.src = audioFile;
+    audioPlayer.load();
+    audioPlayer.play();
+    audioPlayer.style.display = 'block';
+    currentAudio = audioPlayer;
+
+    // Show success message
+    document.getElementById('success-message').style.display = 'block';
+    setTimeout(() => {
+        document.getElementById('success-message').style.display = 'none';
+    }, 6000);
+
+    // Show alert message
+    alert('your song is playing currently. Scroll down to view the audio controls.');
+}
+
+
+        // Stop song functionality
+        function stopSong() {
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+                currentAudio.style.display = 'none';
+                currentAudio = null;
+            }
+        }
+
+        // Toggle like functionality
+        function toggleLike(button) {
+            button.classList.toggle('liked');
+            if (button.classList.contains('liked')) {
+                button.innerHTML = '<i class="fas fa-heart"></i> Unlike';
+            } else {
+                button.innerHTML = '<i class="fas fa-heart"></i> Like';
+            }
+        }
+
+        // Share song functionality
+        function shareSong(title) {
+    alert(`You can share ${title} with your friends, family, and others!`);
+}
+
+
+        // Greeting message based on time of day
+        
+    </script>
+</body>
+</html>
+
+
