@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spotify Sign-in/Sign-up </title>
+  <link rel="icon" href="spotify.jpg" type="image/jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1db954, #191414);
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .form {
+      display: grid;
+      place-items: center;
+      position: relative;
+      width: 350px;
+      height: 405px;
+      padding: 25px;
+      background-color: #161616;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      animation: float 3s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .form-body {
+      width: 100%;
+      padding: 0 25px;
+    }
+
+    .spotify-text {
+      text-align: center;
+      line-height: 2;
+      top: 0%;
+    }
+
+    .spotify-text-1 {
+      color: #00ff7f;
+      line-height: 2;
+      font-weight: bold;
+      font-size: 30px;
+    }
+
+    .spotify-text-2 {
+      color: #16a124;
+      line-height: 2;
+      font-size: 23px;
+      margin-top: 17px;
+      font-weight: bolder;
+    }
+
+    .input-area {
+      margin-top: 40px;
+      position: relative;
+    }
+
+    .form-inp {
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    .form-inp input {
+      width: 85%;
+      padding: 12px 35px 12px 15px;
+      background: transparent;
+      border: 1px solid #e3e3e3;
+      border-radius: 30px;
+      line-height: 1;
+      color: #00ff7f;
+      font-size: 13.4px;
+    }
+
+    .form-inp input:focus {
+      outline: none;
+      border-color: #00ff7f;
+    }
+
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #169721;
+    }
+
+    .login-btn, .signup-btn {
+      margin-top: 20px;
+    }
+
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 14px 13px 12px 13px;
+      background-color: transparent;
+      color: #00ff7f;
+      font-weight: 600;
+      font-size: 14px;
+      border: 0;
+      outline: 1px solid #00ff7f;
+      border-radius: 20px;
+      line-height: 1;
+      cursor: pointer;
+      transition: all ease-in-out 0.3s;
+      position: relative;
+    }
+
+    .submit-btn:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #00ff7f;
+      border-radius: 8px;
+      z-index: -1;
+      transition: all 0.3s ease-in-out;
+      transform: scale(0);
+    }
+
+    .submit-btn:hover {
+      color: #161616;
+    }
+
+    .submit-btn:hover:before {
+      transform: scale(1);
+    }
+
+    .password, .signup-link {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .password a, .signup-link a {
+      color: rgb(18, 165, 18);
+      font-size: 15px;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .bar {
+      position: absolute;
+      left: 50%;
+      bottom: -22%;
+      width: 28px;
+      height: 8px;
+      margin-left: -33px;
+      background-color: #00ff7f;
+      border-radius: 10px;
+    }
+
+    .bar:before,
+    .bar:after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background-color: #ececec;
+      border-radius: 50%;
+    }
+
+    .bar:before {
+      right: -20px;
+    }
+
+    .bar:after {
+      right: -38px;
+    }
+
+    footer {
+            background: #282828;
+            color: #b3b3b3;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .social-icons a {
+            color: #b3b3b3;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            color: #1db954;
+        }
+
+   
+
+    @media (max-width: 600px) {
+      .form {
+        width: 90%;
+        padding: 20px;
+      }
+
+      .spotify-text-1 {
+        font-size: 30px;
+      }
+
+      .spotify-text-2 {
+        font-size: 16px;
+      }
+    }
+  </style>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container">
+    <form id="loginForm" class="form">
+      <div class="form-body">
+        <div class="spotify-text">
+          <div class="spotify-text-1">Spotify Clone Login Bar</div>
+          <div class="spotify-text-2">Welcome Back!!</div>
+        </div>
+        <div class="input-area">
+          <div class="form-inp">
+            <input type="text" id="email" placeholder="Email Address/Phone Number">
+            <span class="toggle-password"><i class="fas fa-user"></i></span>
+          </div>
+          <div class="form-inp">
+            <input type="password" placeholder="Password" id="password">
+            <span class="toggle-password"><i class="fas fa-eye" id="togglePassword"></i></span>
+          </div>
+        </div>
+        <div class="login-btn">
+          <button class="submit-btn" type="submit">Login</button>
+        </div>
+        <div class="password">
+          <a id="forgotPassword">Forgot password?</a>
+        </div>
+        <div class="signup-link">
+          <a id="showSignupForm">Sign Up</a>
+        </div>
+        <div class="bar"></div>
+      </div>
+    </form>
+
+    <form id="signupForm" class="form" style="display:none;">
+      <div class="form-body">
+        <div class="spotify-text">
+          <div class="spotify-text-1">Spotify Clone Sign Up</div>
+          <div class="spotify-text-2">Create Your Account</div>
+        </div>
+        <div class="input-area">
+          <div class="form-inp">
+            <input type="text" id="signupEmail" placeholder="Email Address/Phone Number">
+          </div>
+          <div class="form-inp">
+            <input type="password" placeholder="Password" id="signupPassword">
+            <span class="toggle-password"><i class="fa-sharp fa-thin fa-eye"></i> id="toggleSignupPassword"></i></span>
+          </div>
+        </div>
+        <div class="signup-btn">
+          <button class="submit-btn" type="submit">Sign Up</button>
+        </div>
+        <div class="password">
+          <a id="backToLogin">Back to Login</a>
+        </div>
+        <div class="bar"></div>
+      </div>
+    </form>
+  </div>
+  <footer>
+    <div class="social-icons">
+        <a href="https://www.facebook.com/spotify" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com/spotify" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/spotify" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+    <p><b>© 2024 Spotify Clone. All rights reserved.</b></p>
+</footer>
+  <script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+    const loginForm = document.querySelector('#loginForm');
+    const signupForm = document.querySelector('#signupForm');
+    const forgotPassword = document.querySelector('#forgotPassword');
+    const showSignupForm = document.querySelector('#showSignupForm');
+    const backToLogin = document.querySelector('#backToLogin');
+    const signupPassword = document.querySelector('#signupPassword');
+
+    togglePassword.addEventListener('click', function () {
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+      this.classList.toggle('fa-eye-slash');
+    });
+
+    const toggleSignupPassword = document.querySelector('#toggleSignupPassword');
+    toggleSignupPassword.addEventListener('click', function () {
+      const type = signupPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+      signupPassword.setAttribute('type', type);
+      this.classList.toggle('fa-eye-slash');
+    });
+
+    loginForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.querySelector('#email').value.trim();
+      const passwordValue = password.value.trim();
+
+      if (!email) {
+        alert('Please enter your email or phone number.');
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const phoneRegex = /^\d{10}$/;
+
+      if (!emailRegex.test(email) && !phoneRegex.test(email)) {
+        alert('Please enter a valid email address or phone number.');
+        return;
+      }
+
+      if (!passwordValue) {
+        alert('Please enter your password.');
+        return;
+      }
+
+      if (passwordValue.length < 8) {
+        alert('Password must be at least 8 characters long.');
+        return;
+      }
+
+      window.location.href = 'spotify_clone.html';
+    });
+
+    forgotPassword.addEventListener('click', function () {
+      alert('Redirecting to forgot password page...');
+      // Add your forgot password logic here
+    });
+
+    showSignupForm.addEventListener('click', function () {
+      loginForm.style.display = 'none';
+      signupForm.style.display = 'grid';
+    });
+
+    backToLogin.addEventListener('click', function () {
+      signupForm.style.display = 'none';
+      loginForm.style.display = 'grid';
+    });
+
+    signupForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const signupEmail = document.querySelector('#signupEmail').value.trim();
+      const signupPasswordValue = signupPassword.value.trim();
+
+      if (!signupEmail) {
+        alert('Please enter your email or phone number.');
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const phoneRegex = /^\d{10}$/;
+
+      if (!emailRegex.test(signupEmail) && !phoneRegex.test(signupEmail)) {
+        alert('Please enter a valid email address or phone number.');
+        return;
+      }
+
+      if (!signupPasswordValue) {
+        alert('Please enter your password.');
+        return;
+      }
+
+      if (signupPasswordValue.length < 8) {
+        alert('Password must be at least 8 characters long.');
+        return;
+      }
+
+      alert('Sign up successful!');
+      window.location.href = 'spotify_clone.html';
+    });
+  </script>
+</body>
+</html>
+
+
