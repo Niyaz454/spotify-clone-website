@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Music Player</title>
+    
+    <style>
+        .progress_bar {
+            height: 6px;
+            width: 100%;
+            cursor: pointer;
+            background-color: black;
+            display: inline-block;
+            border-radius: 10px;
+        }
+
+        .album-info_name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            line-height: 1.3em;
+        }
+
+        .scale-in-enter {
+            pointer-events: none;
+        }
+
+        .player-controls_item.-xl {
+            margin-bottom: 0;
+            font-size: 95px;
+            filter: drop-shadow(0 11px 6px rgba(12, 70, 170, 0.45));
+            color: black;
+            width: auto;
+            height: auto;
+            display: inline-flex;
+        }
+
+        @media screen and (max-width: 576px), (max-height: 500px) {
+            .player-controls_item.-xl {
+                margin-left: auto;
+                font-size: 75px;
+                margin-right: 0;
+            }
+        }
+
+        .wrapper {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-size: cover;
+        }
+
+        .icon {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            stroke-width: 0;
+            stroke: currentColor;
+            fill: currentColor;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f50d0d;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .player {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 300px;
+            text-align: center;
+        }
+
+        .album-cover {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .controls button {
+            background: none;
+            border: none;
+            color: rgb(13, 127, 34);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .progress-container {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .progress {
+            width: 0;
+            height: 6px;
+            background: #1db954;
+            border-radius: 10px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background: #d0d8e6;
+            border-radius: 10px;
+        }
+
+        #time-display {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="player">
+            <h1><b>Spotify Music Player</b></h1>
+            <img src="https://via.placeholder.com/300" class="album-cover" id="album-cover" alt="Album Cover">
+            <div class="album-info">
+                <div class="album-info_name" id="song-title">Song Title</div>
+            </div>
+            <div class="controls">
+                <button id="prev"><i class="icon">&#9664;</i></button>
+                <button id="play"><i class="icon">&#9654;</i></button>
+                <button id="next"><i class="icon">&#9654;</i></button>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
+                </div>
+                <div id="time-display">0:00 / 0:00</div>
+                <h2><i>Play your favourite songs here!!</i></h2>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        const songs = [
+            { title: 'Neethane', src: 'Neethane.mp3', cover: 'Neethane.jpg' },
+            { title: 'Vaseegara', src: 'Vaseegara.mp3', cover: 'Vaseegara.jpg' },
+            { title: 'Whistle Podu', src: 'Whistle Podu.mp3', cover: 'Whistle Podu.jpg' },
+            { title: 'Chinna Chinna Kangal', src: 'Chinna Chinna Kangal.mp3', cover: 'Chinna Chinna Kangal.jpg' },
+            { title: 'Vaarayo Vaarayo', src: 'Vaarayo Vaarayo.mp3', cover: 'Vaarayo Vaarayo.jpg' },
+            { title: 'Sirukki Vaasam', src: 'Sirukki Vaasam.mp3', cover: 'Sirukki Vaasam.jpg' },
+            { title: 'Enamo Yedho', src: 'Enamo Yedho.mp3', cover: 'Enamo Yedho.jpg' },
+            { title: 'Maaris Aanandhi', src: 'Maaris Aanandhi.mp3', cover: 'Maaris Aanandhi.jpg' },
+            { title: 'En Jeevan', src: 'En Jeevan.mp3', cover: 'En Jeevan.png' },
+            { title: 'Youth Of Power Pandi', src: 'Youth Of Power Pandi.mp3', cover: 'Youth Of Power Pandi.jpg' }
+        ];
+
+        let currentSongIndex = 0;
+        const audio = new Audio();
+        const playBtn = document.getElementById('play');
+        const prevBtn = document.getElementById('prev');
+        const nextBtn = document.getElementById('next');
+        const songTitle = document.getElementById('song-title');
+        const albumCover = document.getElementById('album-cover');
+        const progress = document.getElementById('progress');
+        const progressBar = document.querySelector('.progress-bar');
+        const timeDisplay = document.getElementById('time-display');
+
+        function loadSong(song) {
+            audio.src = song.src;
+            songTitle.textContent = song.title;
+            albumCover.src = song.cover;
+        }
+
+        function playSong() {
+            audio.play();
+            playBtn.innerHTML = '&#10074;&#10074;';
+        }
+
+        function pauseSong() {
+            audio.pause();
+            playBtn.innerHTML = '&#9654;';
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        playBtn.addEventListener('click', () => {
+            const isPlaying = audio.currentTime > 0 && !audio.paused && !audio.ended && audio.readyState > audio.HAVE_CURRENT_DATA;
+            if (isPlaying) {
+                pauseSong();
+            } else {
+                playSong();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentSongIndex--;
+            if (currentSongIndex < 0) {
+                currentSongIndex = songs.length - 1;
+            }
+            loadSong(songs[currentSongIndex]);
+            playSong();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentSongIndex++;
+            if (currentSongIndex >= songs.length) {
+                currentSongIndex = 0;
+            }
+            loadSong(songs[currentSongIndex]);
+            playSong();
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            const progressPercent = (audio.currentTime / audio.duration) * 100;
+            progress.style.width = `${progressPercent}%`;
+            timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+        });
+
+        audio.addEventListener('loadedmetadata', () => {
+            timeDisplay.textContent = `${formatTime(0)} / ${formatTime(audio.duration)}`;
+        });
+
+        progressBar.addEventListener('click', (e) => {
+            const width = progressBar.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audio.duration;
+            audio.currentTime = (clickX / width) * duration;
+        });
+
+        // Load initial song
+        loadSong(songs[currentSongIndex]);
+    </script>
+</body>
+</html>
